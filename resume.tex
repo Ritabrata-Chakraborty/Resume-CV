@@ -9,7 +9,7 @@
 
 %----------PACKAGES----------
 \usepackage{latexsym}
-\usepackage[margin=0.5in]{geometry}   % 0.5-inch margins
+\usepackage[margin=0.5in]{geometry}
 \usepackage{titlesec}
 \usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
@@ -32,7 +32,7 @@
 \urlstyle{same}
 \raggedbottom
 \raggedright
-\setlength{\tabcolsep}{0in}  % spacing in tabular
+\setlength{\tabcolsep}{0in}
 
 %----------SECTION FORMATTING----------
 \titleformat{\section}{
@@ -42,16 +42,13 @@
 %----------PDF SETUP----------
 \pdfgentounicode=1
 
-%------------------------------------------
-%           CUSTOM COMMANDS
-%------------------------------------------
-
-% Resume item (bullet point)
+%----------CUSTOM COMMANDS----------
+% Bullet point item
 \newcommand{\resumeItem}[1]{
   \item \small{#1\vspace{-2pt}}
 }
 
-% Resume subheading (e.g., job, degree)
+% Entry with title, company/location, role, and date
 \newcommand{\resumeSubheading}[4]{
   \vspace{0pt}\item
   \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
@@ -60,7 +57,7 @@
   \end{tabular*}\vspace{-6pt}
 }
 
-% Resume sub-subheading (e.g., role or subsection under job)
+% Sub-entry with role and date
 \newcommand{\resumeSubSubheading}[2]{
   \vspace{0pt}\item
   \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
@@ -68,7 +65,7 @@
   \end{tabular*}\vspace{-6pt}
 }
 
-% Resume project heading
+% Project entry with title and date
 \newcommand{\resumeProjectHeading}[2]{
   \vspace{0pt}\item
   \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
@@ -76,17 +73,11 @@
   \end{tabular*}\vspace{-6pt}
 }
 
-% Resume subitem (optional nested bullet)
-% \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
-
-% Bullet symbol style
+% Nested bullet style
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-%------------------------------------------
-%         LIST ENVIRONMENTS
-%------------------------------------------
-
-% Subheading list (e.g., Education, Experience)
+%----------LIST ENVIRONMENTS----------
+% Subheading list container
 \newcommand{\resumeSubHeadingListStart}{
   \begin{itemize}[leftmargin=0.10in, label={}]\vspace{6pt}
 }
@@ -94,7 +85,7 @@
   \end{itemize}
 }
 
-% Item list (bullet points under subheadings)
+% Bullet list container
 \newcommand{\resumeItemListStart}{
   \begin{itemize}[leftmargin=0.18in]
 }
@@ -102,29 +93,20 @@
   \end{itemize}\vspace{-6pt}
 }
 
-%------------------------------------------
-%           SKILL LIST (no bullets)
-%------------------------------------------
-
-% Start of skill list (clean, no bullet points)
+% Skill list (no bullets)
 \newcommand{\nbresumeItemListStart}{
   \begin{itemize}[leftmargin=0.10in, label={}, itemsep=2pt, parsep=2pt]\vspace{6pt}
 }
 
-% Individual skill line
+% Skill item
 \newcommand{\nbresumeItem}[1]{
   \item \small{#1}
 }
-
-% End of skill list
 \newcommand{\nbresumeItemListEnd}{
   \end{itemize}\vspace{-6pt}
 }
 
-%-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
+%----------RESUME STARTS HERE----------
 \begin{document}
 
 %----------HEADING----------
@@ -137,18 +119,20 @@
   \href{https://www.scopus.com/authid/detail.uri?authorId=60101248100}{Scopus} $|$
   \href{https://ritabrata-chakraborty.github.io/Portfolio/}{Portfolio} $|$
   \href{https://www.linkedin.com/in/ritabrata-chakraborty-a63268251/}{LinkedIn} $|$
-  \href{mailto:resume@gmail.com}{resume@gmail.com} $|$ \href{tel:+999999999999}{+99 99999 99999}}
+  \href{mailto:ritabratabits@gmail.com}{ritabratabits@gmail.com} $|$ \href{tel:+918910783548}{+91 89107 83548}}
 \end{center}
-
 
 %-----------EDUCATION-----------
 \section{Education}
 \resumeSubHeadingListStart
   \resumeSubheading
+    {University of Pennsylvania}{Philadelphia, PA, USA}
+    {M.S.E. in Robotics, \textbf{GPA: --/4}}{Aug '26 – May '28}
+  \resumeSubheading
     {Birla Institute of Technology and Science, Pilani (BITS Pilani)}{Rajasthan, India}
-    {B.E. in Mechanical Engineering | Minor in Data Science, \textbf{CGPA: X.XX/10 (Final: X.XX/10)}}{Oct '22 – May '26}
+    {B.E. in Mechanical Engineering | Minor in Data Science, \textbf{CGPA: 8.51/10 (Final: 8.57/10)}}{Oct '22 – May '26}
     \resumeItemListStart
-      \resumeItem{\textbf{Institute Merit-cum-Need Scholarship} — Consecutive Recipient (Top X\% of Students)}
+      \resumeItem{\textbf{Institute Merit-cum-Need Scholarship} — Consecutive Recipient (Top 8\% of Students)}
     \resumeItemListEnd
 \resumeSubHeadingListEnd
 
@@ -159,19 +143,28 @@
     {\textbf{Journal Publications}}{}
   \resumeItemListStart
     \resumeItem{
-        K. Kishore, \textbf{R. Chakraborty}, and S. Singh,
-        \textbf{\textit{``Exploring Unknown Indoor Environments with Drones Using a Multi-Critic DDPG Architecture.''}}
-        Under review at \textbf{IEEE Transactions on Artificial Intelligence (TAI)}, 2026.
-        \color{blue}\href{https://drive.google.com/file/d/1Uimegpx43p9dfY7lvgPU_LR3ERb3-YJP/view}{\textbf{\faExternalLink*}}
-        }
-        \vspace{4pt}
+      \textbf{R. Chakraborty}, and K. Kishore,
+      \textbf{\textit{``Navigating Without Satellites: A Critical Survey of GNSS-Denied UAV Navigation.''}}
+      Manuscript in preparation for \textbf{IEEE Transactions on Robotics (T-RO)}, 2026.
+      \color{blue}\href{https://drive.google.com/file/d/1Uimegpx43p9dfY7lvgPU_LR3ERb3-YJP/view}{\textbf{\faExternalLink*}}
+    }
+    \vspace{4pt}
 
-        \resumeItem{
-        \textbf{R. Chakraborty} and P. Kundu,
-        \textbf{\textit{``Beyond ImageNet: VQGAN-Based Augmentation and Optimized Perceptual Metrics for Bearing Fault Diagnosis.''}}
-        Manuscript in preparation for \textbf{IEEE Transactions on Industrial Informatics, (TII)}, 2026.
-        \color{blue}\href{https://drive.google.com/file/d/1o26-f-Rp7bS6296O3eEEwFyPNoUBL_Gq/view?usp=drive_link}{\textbf{\faExternalLink*}}
-        }
+    \resumeItem{
+      \textbf{R. Chakraborty}, and K. Kishore,
+      \textbf{\textit{``Multi-Critic Off-Policy Reinforcement Learning for Quadrotor Velocity Control in Unknown Indoor Environments.''}}
+      Under review at \textbf{IEEE Transactions on Artificial Intelligence (T-AI)}, 2026.
+      \color{blue}\href{https://drive.google.com/file/d/1Uimegpx43p9dfY7lvgPU_LR3ERb3-YJP/view}{\textbf{\faExternalLink*}}
+    }
+    \vspace{4pt}
+
+    \resumeItem{
+      \textbf{R. Chakraborty} and P. Kundu,
+      \textbf{\textit{``A Physics-Informed Comparative Study of Continuous and Discrete Latent Generative Augmentation for Bearing Fault Diagnosis Under Extreme Data Scarcity.''}}
+      Manuscript in preparation for \textbf{IEEE Transactions on Industrial Informatics (T-II)}, 2026.
+      \color{blue}\href{https://drive.google.com/file/d/1o26-f-Rp7bS6296O3eEEwFyPNoUBL_Gq/view?usp=drive_link}{\textbf{\faExternalLink*}}
+    }
+    \vspace{4pt}
 
     \resumeItemListEnd
 
@@ -179,53 +172,53 @@
     {\textbf{Conference Publications}}{}
   \resumeItemListStart
     \resumeItem{
-        Y. Wang, H. He, Y. Cao, J. Liang, \textbf{R. Chakraborty}, and G. A. Sartoretti,
-        \textbf{\textit{``CogniPlan: Uncertainty-Guided Path Planning with Conditional Generative Layout Prediction.''}}
-        Accepted at the \textbf{Conference on Robot Learning (CoRL)}, 2025.
-        \color{blue}\href{https://arxiv.org/pdf/2508.03027}{\textbf{\faExternalLink*}}
-        }
-        \vspace{4pt}
+      Y. Wang, H. He, Y. Cao, J. Liang, \textbf{R. Chakraborty}, and G. Sartoretti,
+      \textbf{\textit{``CogniPlan: Uncertainty-Guided Path Planning with Conditional Generative Layout Prediction.''}}
+      Accepted at the \textbf{Conference on Robot Learning (CoRL)}, 2025.
+      \color{blue}\href{https://arxiv.org/pdf/2508.03027}{\textbf{\faExternalLink*}}
+    }
+    \vspace{4pt}
 
-        \resumeItem{
-        \textbf{R. Chakraborty}, T. Mian, and P. Kundu,
-        \textbf{\textit{``An Efficient Approach for Synthetic Data Generation and Fault Diagnosis for Rotating Machinery.''}}
-        Published in \textbf{IET Conference Proceedings},
-        \textbf{Prognostics and System Health Management Conference (PHM)}, 2025.
-        \color{blue}\href{https://ieeexplore.ieee.org/document/11090096}{\textbf{\faExternalLink*}}
-        }
-        \vspace{4pt}
+    \resumeItem{
+      \textbf{R. Chakraborty}, T. Mian, and P. Kundu,
+      \textbf{\textit{``An Efficient Approach for Synthetic Data Generation and Fault Diagnosis for Rotating Machinery.''}}
+      Published in \textbf{IET Conference Proceedings},
+      \textbf{Prognostics and System Health Management Conference (PHM)}, 2025.
+      \color{blue}\href{https://ieeexplore.ieee.org/document/11090096}{\textbf{\faExternalLink*}}
+    }
+    \vspace{4pt}
 
-        \resumeItem{
-        K. Kishore and \textbf{R. Chakraborty},
-        \textbf{\textit{``Path Planning of Low-Altitude UAV for Tree Canopy Tracking and Orchard Monitoring.''}}
-        Filed as \textbf{Intellectual Property}, 2025.
-        \color{blue}\href{https://drive.google.com/file/d/1TZ-1WKuYXeAOZaP7R5TnSufCdyz3sn4a/view}{\textbf{\faExternalLink*}}
-        }
-        \vspace{4pt}
+    \resumeItem{
+      K. Kishore and \textbf{R. Chakraborty},
+      \textbf{\textit{``Path Planning of Low-Altitude UAV for Tree Canopy Tracking and Orchard Monitoring.''}}
+      Filed as \textbf{Intellectual Property}, 2025.
+      \color{blue}\href{https://drive.google.com/file/d/1TZ-1WKuYXeAOZaP7R5TnSufCdyz3sn4a/view}{\textbf{\faExternalLink*}}
+    }
+    \vspace{4pt}
 
-        \resumeItem{
-        \textbf{R. Chakraborty} and M. S. Dasgupta,
-        \textbf{\textit{``Hockey3D: A Public Field Hockey Shot Trajectory Dataset with 3D Reconstruction and Shot Type Classification.''}}
-        Manuscript in preparation for the \textbf{Conference on Computer Vision and Image Processing (CVIP)}, 2026.
-        \color{blue}\href{https://drive.google.com/file/d/1XSeU50fM_yJUn0u2wcNOM2itZovqAA2V/view}{\textbf{\faExternalLink*}}
-        }
-
+    % \resumeItem{
+    %   \textbf{R. Chakraborty} and M. S. Dasgupta,
+    %   \textbf{\textit{``Hockey3D: A Public Field Hockey Shot Trajectory Dataset with 3D Reconstruction and Shot Type Classification.''}}
+    %   Manuscript in preparation for \textbf{Conference on Computer Vision and Image Processing (CVIP)}, 2026.
+    %   \color{blue}\href{https://drive.google.com/file/d/1XSeU50fM_yJUn0u2wcNOM2itZovqAA2V/view}{\textbf{\faExternalLink*}}
+    % }
     % \vspace{4pt}
+
   \resumeItemListEnd
 \resumeSubHeadingListEnd
 
-%-----------EXPERIENCE-----------
+%-----------EXP _ Robotics & Computer Vision -----------
 \section{Experience -- Robotics \& Computer Vision}
 \resumeSubHeadingListStart
   \resumeSubheading
-    {Multi-Critic Off-Policy RL for Autonomous Indoor Drone Navigation \color{blue}\href{https://github.com/Ritabrata-Chakraborty/Quadcopter-RL-Off-Policy-Velocity-Control/tree/main}{\faExternalLink*}}{}
+    {Multi-Critic Decomposition for Autonomous Indoor Navigation \color{blue}\href{https://github.com/Ritabrata-Chakraborty/Quadcopter-RL-Off-Policy-Velocity-Control/tree/main}{\faExternalLink*}}{}
     {Supervisor: {\color{blue}\href{https://ieeexplore.ieee.org/author/37085653936}{Dr. Kaushal Kishore,}} Principal Scientist, CSIR-CEERI}{Jan '26 -- Present}
   \resumeItemListStart
-      \resumeItem{Orchestrated a multi-critic RL framework for continuous control of quadrotor exploration in unknown indoor environments.}
-      \resumeItem{Implemented a hybrid reward formulation integrating artificial potential fields and prioritized experience replay to improve exploration efficiency and sample utilization.}
+    \resumeItem{Integrated three specialized critics for forward progress, lateral avoidance, and angular alignment with distinct reward signals.}
+    \resumeItem{Deployed multi-critic TD3 with prioritized replay achieving 94.2\% success rate and 22\% lower collision rate versus baseline.}
   \resumeItemListEnd
 
- \resumeSubheading
+  \resumeSubheading
     {Vision-Attention-Driven Autonomous Navigation with Semantic Understanding}{}
     {Supervisor: {\color{blue}\href{https://cde.nus.edu.sg/me/staff/sartoretti-guillaume-a/}{Dr. Guillaume Sartoretti,}} Assistant Professor, MARMoT Lab, NUS}{Aug '25 -- Present}
   \resumeItemListStart
@@ -235,16 +228,15 @@
 
   \resumeSubheading
     {ML Intern $|$ Uber (AI Solutions)}{}
-    {Supervisor: {\color{blue}\href{https://in.linkedin.com/in/malreddysid}{Mr. Siddarth Malreddy,}} Tech Lead Manager \& {\color{blue}\href{https://www.linkedin.com/in/ishannigam/}{Mr. Ishan Nigam,}} Senior ML Engineer, Uber}{July '25 -- Dec '25}
+    {Supervisor: {\color{blue}\href{https://in.linkedin.com/in/malreddysid}{Mr. Siddarth Malreddy,}} Tech Lead Manager \& {\color{blue}\href{https://www.linkedin.com/in/ishannigam/}{Mr. Ishan Nigam,}} Senior ML Engineer, Uber}{Jul '25 -- Dec '25}
   \resumeItemListStart
     \resumeItem{Augmented {\color{blue}\href{https://www.uber.com/us/en/ai-solutions/annotation/}{uLabel}} with object tracking for automated RGB/IR video annotation, reducing manual effort.}
-    \resumeItem{Deployed XGBoost anomaly detection (mAP50: 75\%) to flag perturbed bboxes in human-in-the-loop tracking validation.}
+    \resumeItem{Applied XGBoost anomaly detection (mAP50: 75\%) to flag perturbed bboxes in human-in-the-loop tracking validation.}
   \resumeItemListEnd
 
   \resumeSubheading
     {Design and Development of Smart Automated Field Hockey Ball Launcher \color{blue}\href{https://drive.google.com/file/d/1h7X9fIiih37ivgERVR-wbWsDEil0qvpI/view?usp=drive_link}{\faExternalLink*}}{}
-    {Supervisor: {\color{blue}\href{https://www.bits-pilani.ac.in/pilani/m-s-dasgupta/}{Dr. Mani Shankar Dasgupta,}} Associate Professor, BITS Pilani}
-    {Apr '24 -- Oct '25}
+    {Supervisor: {\color{blue}\href{https://www.bits-pilani.ac.in/pilani/m-s-dasgupta/}{Dr. Mani Shankar Dasgupta,}} Associate Professor, BITS Pilani}{Apr '24 -- Oct '25}
 
     \resumeSubSubheading
       {\textbf{\hspace{4pt}Physics-Based Launcher Mechanical Design and FEM Analysis}}{}
@@ -257,7 +249,7 @@
       {\textbf{\hspace{4pt}Computer Vision Pipeline for 3D Trajectory Reconstruction and Shot Classification}}{}
     \resumeItemListStart
       \resumeItem{Devised 3D ball localization from monocular videos using diameter-based depth and {\color{blue}\href{https://github.com/mguti97/PnLCalib}{PnLCalib}}  (0.76m RMSE).}
-      \resumeItem{Developed TCN-attention classifier fusing trajectory and statistical features, achieving 96.4\% classification accuracy.}
+      \resumeItem{Constructed TCN-attention classifier fusing trajectory and statistical features, achieving 96.4\% classification accuracy.}
     \resumeItemListEnd
 
   \resumeSubheading
@@ -273,32 +265,33 @@
     {Supervisor: {\color{blue}\href{https://ieeexplore.ieee.org/author/37085653936}{Dr. Kaushal Kishore,}} Principal Scientist, CSIR-CEERI}{Jan '24 -- Feb '25}
   \resumeItemListStart
     \resumeItem{Engineered a UAV-based orchard monitoring system using YOLOv11 (Box mAP50: 95.5\%, Mask mAP50: 96.5\%).}
-    \resumeItem{Programmed B-spline trajectory logic and implemented custom yaw-roll controller to minimize drift under wind.}
+    \resumeItem{Implemented B-spline trajectory logic and coded custom yaw-roll controller to minimize drift under wind.}
   \resumeItemListEnd
 
 \resumeSubHeadingListEnd
 
-%-----------EXP _ PM-----------
-\section{Experience -- Predictive Maintenance}
+%-----------EXP _ Generative AI & Predictive Maintenance-----------
+\section{Experience -- Generative AI \& Predictive Maintenance}
 \resumeSubHeadingListStart
   \resumeSubheading
-    {Synthetic Sensor Data Generation and Fault Classification for Bearing Systems}{}
+    {Synthetic Data Generation for Bearing Fault Diagnosis Under Data Scarcity}{}
     {Supervisor: {\color{blue}\href{https://www.kuleuven.be/wieiswie/en/person/00155770}{Dr. Pradeep Kundu,}} Assistant Professor, KU Leuven}{Sep '24 -- Present}
 
-  \resumeSubSubheading
-    {\textbf{\hspace{4pt}Auxiliary Classifier WGAN-GP for Time-Series Sensor Data Generation} {\color{blue}\href{https://github.com/Ritabrata-Chakraborty/An-Efficient-Approach-for-Synthetic-Data-Generation-and-Fault-Diagnosis-for-Rotating-Machinery}{\faExternalLink*}}}{}
-  \resumeItemListStart
-    \resumeItem{Built ACWGAN-GP with TCN discriminator to augment minority fault classes, reaching $\sim$100\% classification accuracy.}
-    \resumeItem{Evaluated synthetic data by comparing real and generated FFT spectra using PCC, Cosine Similarity, MMD, and KL Divergence.}
-  \resumeItemListEnd
+    \resumeSubSubheading
+      {\textbf{\hspace{4pt}Auxiliary Classifier WGAN-GP for Time-Series Sensor Data Generation} {\color{blue}\href{https://github.com/Ritabrata-Chakraborty/An-Efficient-Approach-for-Synthetic-Data-Generation-and-Fault-Diagnosis-for-Rotating-Machinery}{\faExternalLink*}}}{}
+    \resumeItemListStart
+      \resumeItem{Built ACWGAN-GP with TCN discriminator for minority fault class augmentation reaching $\sim$100\% classification accuracy.}
+      \resumeItem{Assessed synthetic data using PCC, Cosine Similarity, MMD, and KL Divergence on FFT spectra.}
+    \resumeItemListEnd
 
-\resumeSubSubheading
-    {\textbf{\hspace{4pt}VQGAN-Based Augmentation and Optimized Perceptual Metrics for Bearing Fault Diagnosis}}{}
-  \resumeItemListStart
-    \resumeItem{Developed Conditional {\color{blue}\href{https://arxiv.org/pdf/2012.09841}{VQGAN}} framework with EMA-updated codebook and Transformer-based autoregressive prior for faulty scalogram synthesis, mitigating class imbalance and enhancing structural realism.}
-    \resumeItem{Designed optimized {\color{blue}\href{https://arxiv.org/abs/1801.03924}{LPIPS}}-based perceptual training and refined {\color{blue}\href{https://arxiv.org/pdf/1706.08500}{FID}} evaluation via domain-adapted layer selection, and developed {\color{blue}\href{https://ieeexplore.ieee.org/document/10294257}{LiteFormer}} variants to validate augmentation gains in bearing fault classification.}
-  \resumeItemListEnd
+    \resumeSubSubheading
+      {\textbf{\hspace{4pt}Physics-Informed Generative Modeling for Bearing Fault Diagnosis Under Data Scarcity}}{}
+    \resumeItemListStart
+      \resumeItem{Formulated physics-informed cVAE-GAN and cVQ-GAN frameworks isolating latent-space effects in CWT scalogram synthesis.}
+      \resumeItem{Validated {\color{blue}\href{https://ieeexplore.ieee.org/document/10294257}{LiteFormer}} classification gains across Density, Coverage, and CMMD metrics.}
+    \resumeItemListEnd
 \resumeSubHeadingListEnd
+
 %-----------PROJECTS-----------
 \section{Projects}
 \resumeSubHeadingListStart
@@ -306,7 +299,7 @@
     {\textbf{Autonomous Drone Navigation $|$ MathWorks Global Student Drone Challenge 2025}}
     {\textit{Mar '25 -- Apr '25}}
   \resumeItemListStart
-    \resumeItem{Programmed vision-based control for Parrot Mambo drone using masking, ray-tracing, and closed-loop yaw control.}
+    \resumeItem{Engineered vision-based control for Parrot Mambo drone using masking, ray-tracing, and closed-loop yaw control.}
     \resumeItem{Optimized speed control and zone-based auto-landing to reduce track completion time.}
   \resumeItemListEnd
 
@@ -317,6 +310,7 @@
     \resumeItem{Navigated ExoMy rover using ArUco detection, Ackermann steering, and spot turns for autonomous hazard avoidance.}
     \resumeItem{Calibrated UR3 arm with MoveIt and OMPL planner for collision-free manipulation (98\% success).}
   \resumeItemListEnd
+
 \resumeSubHeadingListEnd
 
 %--------Leadership------
@@ -349,61 +343,62 @@
   \resumeSubheading
     {Teaching Assistant}{}
     {CS F320: Foundations of Data Science, BITS Pilani}{Jan '26 – Present}
-  \resumeSubSubheading
-    {ME F218: Advanced Mechanics of Solids, BITS Pilani}{Jan '25 – May '25}
-  \resumeSubSubheading
-    {ME F216: Materials Science and Engineering, BITS Pilani}{Sep '24 – Dec '24}
+
+    \resumeSubSubheading
+      {ME F218: Advanced Mechanics of Solids, BITS Pilani}{Jan '25 – May '25}
+
+    \resumeSubSubheading
+      {ME F216: Materials Science and Engineering, BITS Pilani}{Sep '24 – Dec '24}
 
   \resumeItemListStart
     \resumeItem{Assisted 100+ students in labs and tutorials, clarifying concepts and linking theory to practical applications.}
-    \resumeItem{Evaluated assignments and supported faculty in delivering high-impact teaching sessions.}
+    \resumeItem{Analyzed assignments and facilitated faculty in delivering high-impact teaching sessions.}
   \resumeItemListEnd
 \resumeSubHeadingListEnd
 
 \section{Awards \& Achievements}
 \resumeSubHeadingListStart
   \resumeSubheading
+    {\textbf{Finalist} — Meta PyTorch OpenEnv Hackathon (India) \color{blue}\href{https://github.com/Ritabrata-Chakraborty/OpenEnv-Quadcopter-Controller}{\faExternalLink*}}{\textit{Apr '26}}
+    {}{}
+  \vspace{-14pt}
+
+  \resumeSubheading
     {\textbf{3\textsuperscript{rd} Place} — MathWorks Global Drone Student Challenge 2025}{\textit{Mar '25}}
     {}{}
-    % {MathWorks}{}
   \vspace{-14pt}
+
   \resumeSubheading
-    {\textbf{Finalist} — AI for Space and Geospatial Innovation (ISRO Immersion Challenge) \color{blue}\href{https://drive.google.com/file/d/16G0VYC5aEpGW_xqj6y0GRwX1Hb5cWeJk/view?usp=drive_link}{\faExternalLink*}}{\textit{Jul '24}}
+    {\textbf{Finalist} — ISRO Immersion Challenge (AI for Space \& Geospatial Innovation) \color{blue}\href{https://drive.google.com/file/d/16G0VYC5aEpGW_xqj6y0GRwX1Hb5cWeJk/view?usp=drive_link}{\faExternalLink*}}{\textit{Jul '24}}
     {}{}
-    % {CIE–IIITH}{}
   \vspace{-14pt}
+
   \resumeSubheading
     {\textbf{Top 15 Overall, Top 5 in College} — American Express Campus Challenge 2024 \color{blue}\href{https://drive.google.com/file/d/1oC9seJ8GRzicnij6xViUjAum3Zq5Vjlr/view?usp=drive_link}{\faExternalLink*}}{\textit{Jul '24}}
     {}{}
-    % {American Express}{}
   \vspace{-14pt}
+
   \resumeSubheading
     {\textbf{5\textsuperscript{th} Place} \& \textbf{Best Maintenance Award} — European Rover Challenge 2023 (Remote Finals)}{\textit{Sep '23}}
     {}{}
-    % {European Space Foundation}{}
   \vspace{-14pt}
+  
 \resumeSubHeadingListEnd
 
-%-----------PROGRAMMING SKILLS-----------
+%----------TECHNICAL SKILLS----------
 \section{Technical Skills}
 \nbresumeItemListStart
-  \nbresumeItem{
-  \textbf{Relevant Courses:} Machine Learning, Deep Learning, Foundations of Data Science, Applied Statistical Methods, Linear Algebra, Computer Programming, Engineering Optimization, Differential Equations, Design of Machine Elements, Digital Twins}
+  \nbresumeItem{\textbf{Relevant Courses:} Machine Learning, Deep Learning, Foundations of Data Science, Applied Statistical Methods, Linear Algebra, Computer Programming, Engineering Optimization, Differential Equations, Design of Machine Elements, Digital Twins}
   \nbresumeItem{\textbf{Programming Languages:} Python, C++, C, Shell (Linux)}
   \nbresumeItem{\textbf{Robotics \& Simulation:} ROS (with Gazebo, Rviz), MAVROS, Navigation Stack, MoveIt, AirSim, Unity, Unreal Engine, MATLAB, Simulink, QGIS}
   \nbresumeItem{\textbf{Machine Learning:} PyTorch, TensorFlow, Scikit-Learn, OpenCV, Open3D, Matplotlib, Weights \& Biases (W\&B)}
-  % \textbf{Cloud \& DevOps:} AWS (S3, EC2, Lambda), Google Cloud Platform (GCP), Docker, Git, GitHub Actions
   \nbresumeItem{\textbf{Hardware \& Embedded Systems:} NVIDIA Jetson (Nano, Orin), Raspberry Pi, Arduino, IMUs, Stereo Camera, 3D LiDAR}
-  % \textbf{GPU Computing:} CUDA, cuDNN, TensorRT
   \nbresumeItem{\textbf{CAD \& Mechanical Simulation:} ANSYS Mechanical, SolidWorks, Fusion 360}
 \nbresumeItemListEnd
 
-
-% -------------------------------------------
-
 \newpage
 
-%-----------LINKS-----------
+%----------REFERENCE LINKS----------
 \section*{Reference Links}
 
 \vspace{6pt}
@@ -417,33 +412,39 @@
 
 \subsection*{Publications \& Presentations}
 \nbresumeItemListStart
-  \nbresumeItem{Exploring Unknown Indoor Environments with Drones Using a Multi-Critic DDPG Architecture (IEEE TAI 2026) \break
+  \nbresumeItem{Navigating Without Satellites: A Critical Survey of GNSS-Denied UAV Navigation. (IEEE T-RO 2026) \break
   {Draft: \color{blue}\url{https://drive.google.com/file/d/1Uimegpx43p9dfY7lvgPU_LR3ERb3-YJP/view}}}
-  \nbresumeItem{Beyond ImageNet: VQGAN-Based Augmentation and Optimized Perceptual Metrics for Bearing Fault Diagnosis (IEEE TII 2026) \break
+  \nbresumeItem{Multi-Critic Off-Policy Reinforcement Learning for Quadrotor Velocity Control in Unknown Indoor Environments. (IEEE T-AI 2026) \break
+  {Draft: \color{blue}\url{https://drive.google.com/file/d/1Uimegpx43p9dfY7lvgPU_LR3ERb3-YJP/view}}}
+  \nbresumeItem{A Physics-Informed Comparative Study of Continuous and Discrete Latent Generative Augmentation for Bearing Fault Diagnosis Under Extreme Data Scarcity. (IEEE T-II 2026) \break
   {Draft: \color{blue}\url{https://drive.google.com/file/d/1o26-f-Rp7bS6296O3eEEwFyPNoUBL_Gq/view?usp=drive_link}}}
-  \nbresumeItem{Hockey3D: A Public Field Hockey Shot Trajectory Dataset with 3D Reconstruction and Shot Type Classification (CVIP 2026) \break
-  {Draft: \color{blue}\url{https://drive.google.com/file/d/1XSeU50fM_yJUn0u2wcNOM2itZovqAA2V/view?usp=drive_link}}}
   \nbresumeItem{CogniPlan: Uncertainty-Guided Path Planning with Conditional Generative Layout Prediction (CoRL 2025) \break
   {Paper: \color{blue}\url{https://arxiv.org/pdf/2508.03027}} \break
   {Project: \color{blue}\url{https://yizhuo-wang.com/cogniplan/}}}
   \nbresumeItem{An Efficient Approach for Synthetic Data Generation and Fault Diagnosis for Rotating Machinery (PHM 2025) \break
-  {Paper: \color{blue}\url{https://digital-library.theiet.org/doi/abs/10.1049/icp.2025.2364}}}
+  {Paper: \color{blue}\url{https://ieeexplore.ieee.org/document/11090096}}}
   \nbresumeItem{Path Planning of Low-Altitude UAV for Tree Canopy Tracking and Orchard Monitoring (Intellectual Property 2025) \break
-  {Draft: \color{blue}\url{https://drive.google.com/file/d/1TZ-1WKuYXeAOZaP7R5TnSufCdyz3sn4a/view?usp=sharing}}}
+  {Draft: \color{blue}\url{https://drive.google.com/file/d/1TZ-1WKuYXeAOZaP7R5TnSufCdyz3sn4a/view}}}
 \nbresumeItemListEnd
 
 \subsection*{Projects}
 \nbresumeItemListStart
-  \nbresumeItem{ExoMy Rover Navigation (ERC 2023 Remote) \break
+  \nbresumeItem{Autonomous Drone Navigation -- MathWorks Global Student Drone Challenge 2025 \break
+  {3\textsuperscript{rd} Place Winner}}
+  \nbresumeItem{ExoMy Rover Navigation and UR3 Arm Motion Planning -- ERC 2023 Remote \break
   {Report: \color{blue}\url{https://drive.google.com/file/d/1qAeYAupdwq-eb-d-lgASr4xD_Kj0AXmk/view?usp=drive_link}}}
 \nbresumeItemListEnd
 
 \subsection*{Awards \& Achievements}
 \nbresumeItemListStart
-  \nbresumeItem{AI for Space and Geospatial Innovation (ISRO) \break
+  \nbresumeItem{Finalist -- Meta PyTorch OpenEnv Hackathon (India) \break
+  {Project: \color{blue}\url{https://github.com/Ritabrata-Chakraborty/OpenEnv-Quadcopter-Controller}}}
+  \nbresumeItem{3\textsuperscript{rd} Place -- MathWorks Global Student Drone Challenge 2025}
+  \nbresumeItem{Finalist -- ISRO Immersion Challenge (AI for Space \& Geospatial Innovation) \break
   {Presentation: \color{blue}\url{https://drive.google.com/file/d/16G0VYC5aEpGW_xqj6y0GRwX1Hb5cWeJk/view?usp=drive_link}}}
-  \nbresumeItem{American Express Campus Challenge 2024 \break
+  \nbresumeItem{Top 15 Overall, Top 5 in College -- American Express Campus Challenge 2024 \break
   {Presentation: \color{blue}\url{https://drive.google.com/file/d/1oC9seJ8GRzicnij6xViUjAum3Zq5Vjlr/view?usp=drive_link}}}
+  \nbresumeItem{5\textsuperscript{th} Place \& Best Maintenance Award -- European Rover Challenge 2023 (Remote Finals)}
 \nbresumeItemListEnd
 
 
