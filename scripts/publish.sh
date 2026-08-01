@@ -58,9 +58,6 @@ for f in "${TEX_FILES[@]}"; do
   fi
 done
 
-echo "Excluding non-public files from this snapshot..."
-git rm -q --cached --ignore-unmatch "${EXCLUDE_FROM_PUBLISH[@]}"
-
 echo "Compiling redacted PDFs..."
 for f in "${TEX_FILES[@]}"; do
   pdflatex -interaction=nonstopmode "$f" >/dev/null 2>&1
@@ -68,6 +65,10 @@ done
 rm -f ./*.aux ./*.log ./*.out
 
 git add -A
+# Must run AFTER `git add -A`, not before: `git add -A` re-stages anything it
+# finds on disk, so an earlier `git rm --cached` gets silently undone.
+echo "Excluding non-public files from this snapshot..."
+git rm -q --cached --ignore-unmatch "${EXCLUDE_FROM_PUBLISH[@]}"
 git commit -q -m "Publish: redact contact info for public release"
 PUBLISHED=1
 
