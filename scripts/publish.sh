@@ -14,6 +14,9 @@ cd "$(git rev-parse --show-toplevel)"
 RESUME_DIR="/home/rc/Documents/Personal/Resume"
 TEX_FILES=(Master___Resume.tex Research___CV.tex Research___Resume.tex)
 PDF_FILES=(Master___Resume.pdf Research___CV.pdf Research___Resume.pdf)
+# Any file NOT in this list must never reach the public repo — targeted/draft
+# resumes (e.g. TA___Resume.tex) stay local-only until explicitly added here.
+EXCLUDE_FROM_PUBLISH=(CLAUDE.md TA___Resume.tex TA___Resume.pdf)
 
 REAL_EMAIL="ritabratabits@gmail.com"
 REAL_TEL_HREF="tel:+918910783548"
@@ -54,7 +57,9 @@ for f in "${TEX_FILES[@]}"; do
     exit 1
   fi
 done
-git rm -q CLAUDE.md
+
+echo "Excluding non-public files from this snapshot..."
+git rm -q --cached --ignore-unmatch "${EXCLUDE_FROM_PUBLISH[@]}"
 
 echo "Compiling redacted PDFs..."
 for f in "${TEX_FILES[@]}"; do
@@ -65,6 +70,15 @@ rm -f ./*.aux ./*.log ./*.out
 git add -A
 git commit -q -m "Publish: redact contact info for public release"
 PUBLISHED=1
+
+echo "Verifying published tree contains only expected files..."
+ALLOWED_PATTERN='^(Master___Resume\.(tex|pdf)|Research___CV\.(tex|pdf)|Research___Resume\.(tex|pdf)|README\.md|scripts/publish\.sh)$'
+UNEXPECTED="$(git ls-tree -r --name-only HEAD | grep -Ev "$ALLOWED_PATTERN" || true)"
+if [[ -n "$UNEXPECTED" ]]; then
+  echo "FATAL: unexpected files in publish commit, aborting before push:" >&2
+  echo "$UNEXPECTED" >&2
+  exit 1
+fi
 
 echo "Force-pushing to resume-cv/main..."
 git push resume-cv HEAD:main --force
