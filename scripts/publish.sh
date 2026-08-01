@@ -47,8 +47,12 @@ trap restore EXIT
 
 echo "Redacting contact info..."
 for f in "${TEX_FILES[@]}"; do
-  perl -pi -e "s/\\\\href\\{mailto:${REAL_EMAIL}\\}\\{${REAL_EMAIL}\\}/\\\\href{mailto:${FAKE_EMAIL}}{${FAKE_EMAIL}}/" "$f"
-  perl -pi -e "s/\\\\href\\{${REAL_TEL_HREF}\\}\\{${REAL_TEL_TEXT}\\}/\\\\href{${FAKE_TEL_HREF}}{${FAKE_TEL_TEXT}}/" "$f"
+  sed -i "s/\\\\href{mailto:${REAL_EMAIL}}{${REAL_EMAIL}}/\\\\href{mailto:${FAKE_EMAIL}}{${FAKE_EMAIL}}/" "$f"
+  sed -i "s/\\\\href{${REAL_TEL_HREF}}{${REAL_TEL_TEXT}}/\\\\href{${FAKE_TEL_HREF}}{${FAKE_TEL_TEXT}}/" "$f"
+  if grep -qF "$REAL_EMAIL" "$f" || grep -qF "$REAL_TEL_TEXT" "$f"; then
+    echo "FATAL: redaction did not apply to $f — aborting before commit/push." >&2
+    exit 1
+  fi
 done
 git rm -q CLAUDE.md
 
