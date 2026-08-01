@@ -14,8 +14,8 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 RESUME_DIR="/home/rc/Documents/Personal/Resume"
-TEX_FILES=(Master___Resume.tex Research___CV.tex Research___Resume.tex)
-PDF_FILES=(Master___Resume.pdf Research___CV.pdf Research___Resume.pdf)
+TEX_FILES=(Master___Resume.tex Master___CV.tex Research___Resume.tex)
+PDF_FILES=(Master___Resume.pdf Master___CV.pdf Research___Resume.pdf)
 # Targeted/draft resumes that stay local-only — never pushed to the public
 # repo, but still compiled fresh and copied to RESUME_DIR like everything else.
 LOCAL_ONLY_TEX=(TA___Resume.tex Leadership___Resume.tex)
@@ -79,7 +79,7 @@ git commit -q -m "Publish: redact contact info for public release"
 PUBLISHED=1
 
 echo "Verifying published tree contains only expected files..."
-ALLOWED_PATTERN='^(Master___Resume\.(tex|pdf)|Research___CV\.(tex|pdf)|Research___Resume\.(tex|pdf)|README\.md|scripts/publish\.sh)$'
+ALLOWED_PATTERN='^(Master___Resume\.(tex|pdf)|Master___CV\.(tex|pdf)|Research___Resume\.(tex|pdf)|README\.md|scripts/publish\.sh)$'
 UNEXPECTED="$(git ls-tree -r --name-only HEAD | grep -Ev "$ALLOWED_PATTERN" || true)"
 if [[ -n "$UNEXPECTED" ]]; then
   echo "FATAL: unexpected files in publish commit, aborting before push:" >&2

@@ -24,7 +24,7 @@ Work is grouped by theme, with two detailed, impact-driven bullets per entry.
 9. Volunteering
 10. Technical Skills & Coursework
 
-## Research___CV.tex
+## Master___CV.tex
 
 A comprehensive, academic-style CV: the same body of work as the Master
 resume, condensed to one-line topics rather than full bullet descriptions.
@@ -56,7 +56,7 @@ Every file is self-contained; compile any of them with:
 
 ```bash
 pdflatex Master___Resume.tex
-pdflatex Research___CV.tex
+pdflatex Master___CV.tex
 pdflatex Research___Resume.tex
 ```
 

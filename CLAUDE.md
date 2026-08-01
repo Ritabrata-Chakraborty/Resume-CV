@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Three LaTeX documents for one person (Ritabrata Chakraborty), all sharing an identical custom macro preamble:
 
 - `Master___Resume.tex` — comprehensive resume, the content source of truth. Grouped by theme, two impact bullets per entry.
-- `Research___CV.tex` — comprehensive CV: same body of work as the Master resume, condensed to one-line topics.
+- `Master___CV.tex` — comprehensive CV: same body of work as the Master resume, condensed to one-line topics.
 - `Research___Resume.tex` — short, selective resume. Deliberately not comprehensive; don't auto-sync new content into it, only edit when explicitly asked.
 
 Each `.tex` has a matching `.pdf` of the same base name — regenerate and commit together whenever source changes.
@@ -16,7 +16,7 @@ Each `.tex` has a matching `.pdf` of the same base name — regenerate and commi
 
 ```bash
 pdflatex Master___Resume.tex
-pdflatex Research___CV.tex
+pdflatex Master___CV.tex
 pdflatex Research___Resume.tex
 rm -f *.aux *.log *.out   # never commit these
 ```
@@ -43,11 +43,11 @@ rm -f *.aux *.log *.out   # never commit these
   ```bash
   grep -o '\\resumeItem{[A-Z][a-z]*' Master___Resume.tex | sed 's/\\resumeItem{//' | sort | uniq -c | awk '$1>1'
   ```
-  `Research___CV.tex` bullets are noun-phrase topics, not sentences — this rule doesn't apply there.
+  `Master___CV.tex` bullets are noun-phrase topics, not sentences — this rule doesn't apply there.
 
 ## CV-is-a-brief-of-the-Master-resume rule
 
-`Research___CV.tex` is derived from `Master___Resume.tex`, not written independently:
+`Master___CV.tex` is derived from `Master___Resume.tex`, not written independently:
 
 - One resume topic (a `\resumeSubheading` or nested `\resumeSubSubheading`) → exactly one condensed `\resumeItem` bullet in the CV. Don't merge two resume sub-projects into one CV bullet.
 - Drop full impact bullets to a single one-line topic; no quantified outcomes.
