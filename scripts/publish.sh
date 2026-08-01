@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Publish a contact-info-redacted snapshot of the resume/CV to the public
-# `resume-cv` remote, then restore real contact info locally.
+# `resume-cv` remote, then restore real contact info locally. Every PDF in
+# the repo (public and local-only) is recompiled fresh and copied to
+# RESUME_DIR, even though only the public ones get redacted and pushed.
 #
 # Preconditions: all real content (including CLAUDE.md) already committed on
 # `main`. Only *.tex/CLAUDE.md are checked for cleanliness — PDFs are expected
@@ -14,9 +16,13 @@ cd "$(git rev-parse --show-toplevel)"
 RESUME_DIR="/home/rc/Documents/Personal/Resume"
 TEX_FILES=(Master___Resume.tex Research___CV.tex Research___Resume.tex)
 PDF_FILES=(Master___Resume.pdf Research___CV.pdf Research___Resume.pdf)
-# Any file NOT in this list must never reach the public repo — targeted/draft
-# resumes (e.g. TA___Resume.tex) stay local-only until explicitly added here.
-EXCLUDE_FROM_PUBLISH=(CLAUDE.md TA___Resume.tex TA___Resume.pdf Leadership___Resume.tex Leadership___Resume.pdf)
+# Targeted/draft resumes that stay local-only — never pushed to the public
+# repo, but still compiled fresh and copied to RESUME_DIR like everything else.
+LOCAL_ONLY_TEX=(TA___Resume.tex Leadership___Resume.tex)
+LOCAL_ONLY_PDF=(TA___Resume.pdf Leadership___Resume.pdf)
+# Any file NOT in this list must never reach the public repo — add new
+# local-only resumes to LOCAL_ONLY_TEX/PDF above, not just here.
+EXCLUDE_FROM_PUBLISH=(CLAUDE.md "${LOCAL_ONLY_TEX[@]}" "${LOCAL_ONLY_PDF[@]}")
 
 REAL_EMAIL="ritabratabits@gmail.com"
 REAL_TEL_HREF="tel:+918910783548"
@@ -25,7 +31,7 @@ FAKE_EMAIL="rc@gmail.com"
 FAKE_TEL_HREF="tel:+910000000000"
 FAKE_TEL_TEXT="+91 00000 00000"
 
-if [[ -n "$(git status --porcelain -- "${TEX_FILES[@]}" CLAUDE.md)" ]]; then
+if [[ -n "$(git status --porcelain -- "${TEX_FILES[@]}" "${LOCAL_ONLY_TEX[@]}" CLAUDE.md)" ]]; then
   echo "Uncommitted changes in .tex files or CLAUDE.md — commit real content first." >&2
   exit 1
 fi
@@ -39,12 +45,12 @@ restore() {
     git checkout -- "${TEX_FILES[@]}" 2>/dev/null || true
   fi
   rm -f ./*.aux ./*.log ./*.out
-  for f in "${TEX_FILES[@]}"; do
+  for f in "${TEX_FILES[@]}" "${LOCAL_ONLY_TEX[@]}"; do
     pdflatex -interaction=nonstopmode "$f" >/dev/null 2>&1
   done
   rm -f ./*.aux ./*.log ./*.out
-  cp "${PDF_FILES[@]}" "$RESUME_DIR/"
-  echo "Restored real content and PDFs (repo + $RESUME_DIR)."
+  cp "${PDF_FILES[@]}" "${LOCAL_ONLY_PDF[@]}" "$RESUME_DIR/"
+  echo "Restored real content and PDFs (repo + $RESUME_DIR, all PDFs including local-only)."
 }
 trap restore EXIT
 
