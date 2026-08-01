@@ -16,7 +16,7 @@ TEX_FILES=(Master___Resume.tex Research___CV.tex Research___Resume.tex)
 PDF_FILES=(Master___Resume.pdf Research___CV.pdf Research___Resume.pdf)
 # Any file NOT in this list must never reach the public repo — targeted/draft
 # resumes (e.g. TA___Resume.tex) stay local-only until explicitly added here.
-EXCLUDE_FROM_PUBLISH=(CLAUDE.md TA___Resume.tex TA___Resume.pdf)
+EXCLUDE_FROM_PUBLISH=(CLAUDE.md TA___Resume.tex TA___Resume.pdf Leadership___Resume.tex Leadership___Resume.pdf)
 
 REAL_EMAIL="ritabratabits@gmail.com"
 REAL_TEL_HREF="tel:+918910783548"

@@ -1,0 +1,243 @@
+%-------------------------
+% Resume in LaTeX
+% Author: Ritabrata Chakraborty
+% Based on: https://github.com/Ritabrata-Chakraborty/Research-Resume
+% License: MIT
+%-------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+%----------PACKAGES----------
+\usepackage{latexsym}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\input{glyphtounicode}
+
+%----------PAGE SETUP----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+%----------SECTION FORMATTING----------
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-10pt}]
+
+%----------PDF SETUP----------
+\pdfgentounicode=1
+
+%----------CUSTOM COMMANDS----------
+% Bullet point item
+\newcommand{\resumeItem}[1]{
+  \item \small{#1\vspace{-2pt}}
+}
+
+% Entry with title, company/location, role, and date
+\newcommand{\resumeSubheading}[4]{
+  \vspace{0pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{#2} \\
+    \textit{\small #3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-6pt}
+}
+
+% Sub-entry with role and date
+\newcommand{\resumeSubSubheading}[2]{
+  \vspace{0pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textit{\small #1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-6pt}
+}
+
+% Project entry with title and date
+\newcommand{\resumeProjectHeading}[2]{
+  \vspace{0pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \small #1 & #2 \\
+  \end{tabular*}\vspace{-6pt}
+}
+
+% Nested bullet style
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+%----------LIST ENVIRONMENTS----------
+% Subheading list container
+\newcommand{\resumeSubHeadingListStart}{
+  \begin{itemize}[leftmargin=0.10in, label={}]\vspace{6pt}
+}
+\newcommand{\resumeSubHeadingListEnd}{
+  \end{itemize}
+}
+
+% Bullet list container
+\newcommand{\resumeItemListStart}{
+  \begin{itemize}[leftmargin=0.18in]
+}
+\newcommand{\resumeItemListEnd}{
+  \end{itemize}\vspace{-6pt}
+}
+
+% Skill list (no bullets)
+\newcommand{\nbresumeItemListStart}{
+  \begin{itemize}[leftmargin=0.10in, label={}, itemsep=2pt, parsep=2pt]\vspace{6pt}
+}
+
+% Skill item
+\newcommand{\nbresumeItem}[1]{
+  \item \small{#1}
+}
+\newcommand{\nbresumeItemListEnd}{
+  \end{itemize}\vspace{-6pt}
+}
+
+%----------RESUME STARTS HERE----------
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+  \textbf{\huge Ritabrata Chakraborty} \\ [6pt]
+  \small
+  {\color{blue}\href{https://ritabrata-chakraborty.github.io/Portfolio/}{Portfolio} $|$
+  \href{https://www.linkedin.com/in/ritabrata-chakraborty-a63268251/}{LinkedIn} $|$
+  \href{mailto:ritabratabits@gmail.com}{ritabratabits@gmail.com} $|$ \href{tel:+918910783548}{+91 89107 83548}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {University of Pennsylvania}{Pennsylvania, USA}
+    {M.S.E. in Robotics}{Aug '26 – May '28}
+  \resumeSubheading
+    {Birla Institute of Technology and Science, Pilani (BITS Pilani)}{Rajasthan, India}
+    {B.E. in Mechanical Engineering | Minor in Data Science}{Oct '22 – May '26}
+    \resumeItemListStart
+      \resumeItem{\textbf{Institute Merit-cum-Need Scholarship} — Consecutive Recipient (Top 8\% of Students)}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-----------LEADERSHIP & VOLUNTEERING-----------
+\section{Leadership \& Volunteering}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Deputy Director of Academic Programming}{}
+    {Graduate and Professional Student Assembly (GAPSA), University of Pennsylvania}{Aug '26 – Present}
+
+  \resumeSubheading
+    {Vice-President}{}
+    {South Asian Association (Rangoli), University of Pennsylvania}{Aug '26 – Present}
+
+  \resumeSubheading
+    {President \& Secretary}{}
+    {Mechanical Engineering Association (MEA), BITS Pilani}{Jun '24 – May '26}
+  \resumeItemListStart
+    \resumeItem{Coordinated 10+ events and career sessions for 300+ students, facilitating technical exposure and alumni interaction.}
+    \resumeItem{Managed production of 500+ merchandise items and led outreach, boosting student participation by 20\%.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {President \& Tech Fest Coordinator}{}
+    {Indian Society of Heating, Refrigerating, and Air Conditioning Engineers (ISHRAE), BITS Pilani}{Oct '24 – Jul '25}
+  \resumeItemListStart
+    \resumeItem{Led a team of 25+ members to organize 4+ technical workshops with industry experts.}
+    \resumeItem{Hosted 3 competitions and networking events, engaging 200+ students in professional development.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Project Manager}{}
+    {Tinkerer's Lab (TL), BITS Pilani}{May '24 – Jul '25}
+  \resumeItemListStart
+    \resumeItem{Supervised 5 interdisciplinary teams (30+ members) delivering hands-on engineering projects.}
+    \resumeItem{Oversaw shared resources, conducted weekly reviews, and mentored 50+ students in practical skills.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Treasurer}{}
+    {Bengali Cultural Association (Moruchhaya), BITS Pilani}{May '24 – Jul '25}
+  \resumeItemListStart
+    \resumeItem{Allocated funds and maintained financial records for merchandise sales, cultural programs, and annual events.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Volunteer}{}
+    {Junoon, National Service Scheme (NSS), BITS Pilani}{Sep '23 – Sep '23}
+  \resumeItemListStart
+    \resumeItem{Organized sports and recreational competitions for specially abled children from 25+ colleges.}
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-----------WORK EXPERIENCE-----------
+\section{Work Experience}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {ML Intern}{Uber (AI Solutions)}
+    {}{Jul '25 – Dec '25}
+  \resumeItemListStart
+    \resumeItem{Collaborated with a global engineering team to streamline data annotation workflows.}
+    \resumeItem{Applied analytical problem-solving to validate large-scale datasets, improving process reliability.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {Subject Matter Expert}{Knowledge Cultivator}
+    {Self-supervised}{Nov '23 – Feb '24}
+  \resumeItemListStart
+    \resumeItem{Resolved numerical problems for student clients using MATLAB, CAD, and Python.}
+    \resumeItem{Authored academic content across diverse research topics.}
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-----------AWARDS & ACHIEVEMENTS-----------
+\section{Awards \& Achievements}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {\textbf{Finalist} — Meta PyTorch OpenEnv Hackathon (India)}{\mdseries\textit{Apr '26}}
+    {}{}
+  \vspace{-14pt}
+
+  \resumeSubheading
+    {\textbf{3\textsuperscript{rd} Place} — MathWorks Global Drone Student Challenge 2025}{\mdseries\textit{Mar '25}}
+    {}{}
+  \vspace{-14pt}
+
+  \resumeSubheading
+    {\textbf{Finalist} — ISRO Immersion Challenge (AI for Space \& Geospatial Innovation)}{\mdseries\textit{Jul '24}}
+    {}{}
+  \vspace{-14pt}
+
+  \resumeSubheading
+    {\textbf{Top 15 Overall, Top 5 in College} — American Express Campus Challenge 2024}{\mdseries\textit{Jul '24}}
+    {}{}
+  \vspace{-14pt}
+
+  \resumeSubheading
+    {\textbf{5\textsuperscript{th} Place} \& \textbf{Best Maintenance Award} — European Rover Challenge 2023 (Remote Finals)}{\mdseries\textit{Sep '23}}
+    {}{}
+  \vspace{-14pt}
+
+\resumeSubHeadingListEnd
+
+%----------SKILLS----------
+\section{Skills}
+\nbresumeItemListStart
+  \nbresumeItem{\textbf{Leadership \& Organization:} Event Planning, Team Management, Budget Allocation, Mentorship, Cross-Functional Coordination}
+  \nbresumeItem{\textbf{Communication:} Public Speaking, Stakeholder Outreach, Technical Writing}
+  \nbresumeItem{\textbf{Software:} Microsoft Office (Excel, PowerPoint, Word), Google Workspace, Python}
+\nbresumeItemListEnd
+
+\end{document}
