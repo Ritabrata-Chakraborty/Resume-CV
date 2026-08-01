@@ -4,162 +4,65 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository purpose
 
-Three standalone LaTeX documents for one person (Ritabrata Chakraborty). Two are
-**comprehensive** (everything the person has done) and one is a **short selective**
-extract:
+Three LaTeX documents for one person (Ritabrata Chakraborty), all sharing an identical custom macro preamble:
 
-- `Master___Resume.tex` — **comprehensive resume** and the content source of truth.
-  Work is grouped by theme (e.g. "Experience -- Robotics & Computer Vision") with
-  two detailed, impact-driven bullets per entry. New experience/projects land here
-  first.
-- `Research___CV.tex` — **comprehensive CV**: the same content as the Master resume
-  but in brief. Roles are split by category (Research / Industry / Teaching /
-  Leadership & Volunteering / Projects) and each entry is condensed to one-line
-  topics rather than full bullet descriptions.
-- `Research___Resume.tex` — **short, selective resume** for targeted applications.
-  It is *not* comprehensive: it deliberately carries a subset of entries and some
-  entries stay commented out. Do **not** auto-sync new content into this file; only
-  change it when explicitly asked.
+- `Master___Resume.tex` — comprehensive resume, the content source of truth. Grouped by theme, two impact bullets per entry.
+- `Research___CV.tex` — comprehensive CV: same body of work as the Master resume, condensed to one-line topics.
+- `Research___Resume.tex` — short, selective resume. Deliberately not comprehensive; don't auto-sync new content into it, only edit when explicitly asked.
 
-Each `.tex` file has a matching pre-built `.pdf` of the same base name checked into
-the repo — regenerate and re-commit these together whenever the `.tex` source changes.
+Each `.tex` has a matching `.pdf` of the same base name — regenerate and commit together whenever source changes.
 
 ## Build
 
-Compile any file directly with a standard TeX Live install:
-
 ```bash
-pdflatex "Master___Resume.tex"
-pdflatex "Research___CV.tex"
-pdflatex "Research___Resume.tex"
+pdflatex Master___Resume.tex
+pdflatex Research___CV.tex
+pdflatex Research___Resume.tex
+rm -f *.aux *.log *.out   # never commit these
 ```
-
-No bibliography/index step is needed (no `.bib`, no cross-references requiring a
-second pass beyond pdfLaTeX's own resolution). Clean up build artifacts after
-compiling — `.aux`/`.log`/`.out` should not be committed:
-
-```bash
-rm -f *.aux *.log *.out
-```
-
-Required packages (all standard TeX Live): `latexsym`, `geometry`, `titlesec`,
-`marvosym`, `color`, `enumitem`, `hyperref`, `fancyhdr`, `babel`, `tabularx`,
-`fontawesome5`.
 
 ## Shared macro system
 
-Both files define an **identical custom macro preamble** (lines ~45–107) that all
-content is built from. When editing content, use these macros rather than raw
-LaTeX markup, and if a macro needs to change, change it identically in both files:
+- `\resumeSubheading{title}{location/company}{role/description}{date}` — two-column entry, `title`/`location` bold on top, `role`/`date` italic below.
+- `\resumeSubSubheading{role}{date}` — nested sub-entry under a `\resumeSubheading`.
+- `\resumeProjectHeading{title}{date}` — bold subsection label (e.g. inside Publications).
+- `\resumeItemListStart` / `\resumeItem{...}` / `\resumeItemListEnd` — bullet list under an entry.
+- `\nbresumeItemListStart` / `\nbresumeItem{...}` / `\nbresumeItemListEnd` — no-bullet list (Technical Skills).
 
-- `\resumeSubHeadingListStart` / `\resumeSubHeadingListEnd` — wraps a block of
-  entries (e.g. all Education entries, all Research Experience entries).
-- `\resumeSubheading{title}{location/company}{role/description}{date}` — the
-  main entry type: renders a two-column row with `title`/`location` bolded on top
-  and `role`/`date` italicized underneath. Used for Education, Experience,
-  Leadership, and (with the 3rd/4th args left as `{}{}`) for single-line
-  Awards/Honours entries — see below.
-- `\resumeSubSubheading{role}{date}` — a nested sub-entry under a `\resumeSubheading`
-  (e.g. multiple courses taught under one Teaching Assistant role).
-- `\resumeProjectHeading{title}{date}` — used as a bold subsection label inside
-  Publications (e.g. "Journal Publications", "Poster Presentations").
-- `\resumeItemListStart` / `\resumeItem{...}` / `\resumeItemListEnd` — bullet list
-  under an entry.
-- `\nbresumeItemListStart` / `\nbresumeItem{...}` / `\nbresumeItemListEnd` — a
-  no-bullet list, used for Technical Skills lines.
+**Gotcha — bold dates:** `\resumeSubheading`'s 2nd argument is wrapped in `\textbf{}`. For single-line entries (Awards, Honours, Competitive Exams) that put a date there with args 3–4 empty, prefix it with `\mdseries` (`{\mdseries\textit{Mar '25}}`) to cancel the inherited bold.
 
-**Known gotcha:** `\resumeSubheading`'s 2nd argument is wrapped in `\textbf{...}`
-by the macro. When it's used to hold a *date* (e.g. single-line Awards/Honours
-entries where args 3–4 are empty), the date inherits unwanted bold — prefix it with
-`\mdseries` (e.g. `{\mdseries\textit{Mar '25}}`) to cancel the bold while keeping
-the italic. This has already been applied throughout; keep it consistent in new
-entries of this pattern.
-
-**Known gotcha:** `\resumeSubheading`/`\resumeSubSubheading`/`\resumeProjectHeading`
-render their arguments inside a `tabular*` environment, so a raw unescaped `&`
-anywhere in an argument is read as a column separator and breaks compilation with
-cascading `Extra alignment tab` / `Missing }` errors. Always escape ampersands as
-`\&` in entry text (organization names, etc.).
+**Gotcha — literal `&`:** entries render inside a `tabular*`; an unescaped `&` in any argument is read as a column separator and cascades into fatal compile errors. Always escape as `\&`.
 
 ## Content conventions
 
-- Dates use an en dash with spaces on both sides: `Jan '24 – May '26` (not `--` or
-  em dash). Compilation succeeds either way, but the file should stay internally
-  consistent — check for stray `--` date separators after edits.
-- The resume/CV author's own name is always bolded in publication author lists:
-  `\textbf{R. Chakraborty}`.
-- External links use `\color{blue}\href{URL}{\faExternalLink*}`, bolded
-  (`\textbf{\faExternalLink*}`) in the Publications section, unbolded elsewhere
-  (in Experience entry headings/bullets) — this distinction is intentional, not an
-  inconsistency to fix.
-- Publications are split into subsections by type (Journal / Conference / Poster /
-  Peer Reviews) via `\resumeProjectHeading`; keep new publications filed under the
-  correct subsection rather than adding a new top-level section.
+- Dates: en dash with spaces, `Jan '24 – May '26` (not `--`).
+- Author's own name always bolded in publication lists: `\textbf{R. Chakraborty}`.
+- Link icons (`\faExternalLink*`) are bold in Publications, unbold elsewhere — intentional, not an inconsistency.
+- Publications are split by type (Journal / Conference / Poster / Peer Reviews) via `\resumeProjectHeading`.
+- Every `\resumeItem` bullet in `Master___Resume.tex` / `Research___Resume.tex` opens with a distinct action verb — no repeats in a given file. Check before adding:
+  ```bash
+  grep -o '\\resumeItem{[A-Z][a-z]*' Master___Resume.tex | sed 's/\\resumeItem{//' | sort | uniq -c | awk '$1>1'
+  ```
+  `Research___CV.tex` bullets are noun-phrase topics, not sentences — this rule doesn't apply there.
 
 ## CV-is-a-brief-of-the-Master-resume rule
 
-`Research___CV.tex` is a condensed version of **`Master___Resume.tex`** (not of the
-short `Research___Resume.tex`), not an independently written document. When adding
-or editing an experience/project entry, treat the Master resume as the source of
-truth for content and derive the CV entry from it:
+`Research___CV.tex` is derived from `Master___Resume.tex`, not written independently:
 
-- **Granularity**: each distinct topic in the resume — a `\resumeSubheading`
-  project heading or a nested `\resumeSubSubheading` sub-project — becomes exactly
-  one `\resumeItem` bullet in the corresponding CV entry. Don't merge two resume
-  sub-projects into a single CV bullet (e.g. KU Leuven's two `\resumeSubSubheading`
-  entries in the resume map to two separate one-line bullets in the CV, not one).
-- **Text**: drop the resume's full impact/metric bullets down to a single
-  one-line topic/title per project (no quantified outcomes, no multi-sentence
-  description).
-- **Links**: every link present in the resume version of a project must still
-  appear in the CV version — either as the same trailing `\faExternalLink*` icon,
-  or embedded on the relevant keyword in the one-line topic text (e.g. resume
-  links "PnLCalib" inline → CV keeps that as `{\color{blue}\href{...}{PnLCalib}}`
-  inside its shortened bullet). Never let condensing silently drop a link.
-- When multiple resume experience headings share the same institution/supervisor
-  (e.g. two separate CSIR-CEERI stints), they're merged into one CV
-  `\resumeSubheading` with a spanning date range and one bullet per original
-  resume topic — this is why CV entry counts don't 1:1 match resume entry counts,
-  but *topic* counts should.
-- If an entry exists in one file but not the other, that's a gap to flag/fix, not a
-  stylistic choice — the CV and Master resume should cover the same body of work.
-  (`Research___Resume.tex` is exempt: it is selective by design.)
+- One resume topic (a `\resumeSubheading` or nested `\resumeSubSubheading`) → exactly one condensed `\resumeItem` bullet in the CV. Don't merge two resume sub-projects into one CV bullet.
+- Drop full impact bullets to a single one-line topic; no quantified outcomes.
+- Every link in the resume version must survive in the CV version — as the same icon or embedded on a keyword. Never let condensing drop a link.
+- Resume headings sharing an institution/supervisor merge into one CV entry with a spanning date range and one bullet per original topic.
+- A gap between the two files (entry in one but not the other) should be flagged, not left — except `Research___Resume.tex`, which is exempt by design.
 
-**Known outstanding gap:** the BARC research experience (railgun impact testing;
-constrained drone detection/tracking) exists in `Research___CV.tex` but has no
-counterpart in `Master___Resume.tex`, because no metrics/outcomes were supplied for
-resume-style bullets. Ask before inventing them.
+## Publishing a redacted public copy
 
-## Resume action-verb convention
+Remote `resume-cv` → `https://github.com/Ritabrata-Chakraborty/Resume-CV.git` (public). There is no `origin` remote — this repo pushes nowhere else.
 
-Every `\resumeItem` bullet in the resumes opens with an action verb, and **no
-leading verb should repeat** across a given document. Before adding a new bullet,
-scan existing bullets' opening words and pick an unused verb ("Engineered" was
-previously duplicated and had to be re-verbed — see git history). To check
-mechanically:
+Real contact info must never reach that repo: email/phone are replaced with placeholders (`rc@gmail.com`, `+91 00000 00000`), and `CLAUDE.md` is excluded entirely.
 
-```bash
-grep -o '\\resumeItem{[A-Z][a-z]*' "Master___Resume.tex" | sort | uniq -c | awk '$1>1'
-```
-
-This applies to `Master___Resume.tex` and `Research___Resume.tex`;
-`Research___CV.tex` bullets are noun-phrase topics, not action-verb sentences, so
-it doesn't apply there.
-
-## Adding a new project/experience (typical workflow)
-
-The user supplies raw notes (title, dates, supervisor, rough bullets, often a "Tech
-Stack:" line). Convert them as follows:
-
-1. Write **exactly two** bullets per entry in `Master___Resume.tex`, each opening
-   with an unused action verb and roughly 100–125 characters — match the visual
-   length of neighbouring bullets.
-2. **Drop the "Tech Stack:" line** — this format doesn't carry one; fold the one or
-   two tools that matter into the bullet prose instead.
-3. Keep quantified outcomes the user provided (percentages, counts, timings); never
-   invent new ones.
-4. Derive the condensed CV entry per the brief rule above, carrying links across.
-5. Recompile both PDFs and delete the build artifacts.
-
-Project titles may be reworded to match the existing
-`Title $|$ Competition/Venue Year` pattern used in the Projects sections.
+Run `scripts/publish.sh` to do the whole thing safely:
+1. Requires `*.tex` and `CLAUDE.md` already committed on `main` (fails otherwise).
+2. Redacts contact info in all three `.tex` files, removes `CLAUDE.md`, recompiles PDFs.
+3. Commits that redacted snapshot and force-pushes it to `resume-cv`'s `main`.
+4. Always restores real contact info afterward (`git reset --hard` the publish commit away), recompiles real PDFs, and copies them to `/home/rc/Documents/Personal/Resume/` — this restore runs even if the push fails.
