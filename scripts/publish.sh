@@ -79,7 +79,7 @@ git commit -q -m "Publish: redact contact info for public release"
 PUBLISHED=1
 
 echo "Verifying published tree contains only expected files..."
-ALLOWED_PATTERN='^(Master___Resume\.(tex|pdf)|Master___CV\.(tex|pdf)|Research___Resume\.(tex|pdf)|README\.md|scripts/publish\.sh)$'
+ALLOWED_PATTERN='^(Master___Resume\.(tex|pdf)|Master___CV\.(tex|pdf)|Research___Resume\.(tex|pdf)|README\.md|scripts/(publish\.sh|check_consistency\.py))$'
 UNEXPECTED="$(git ls-tree -r --name-only HEAD | grep -Ev "$ALLOWED_PATTERN" || true)"
 if [[ -n "$UNEXPECTED" ]]; then
   echo "FATAL: unexpected files in publish commit, aborting before push:" >&2
