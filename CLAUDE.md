@@ -2,67 +2,103 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Repository purpose
+## The five documents
 
-Three LaTeX documents for one person (Ritabrata Chakraborty), all sharing an identical custom macro preamble:
+`Master___Resume.tex` is the **single source of truth**. Everything else is derived from it.
 
-- `Master___Resume.tex` — comprehensive resume, the content source of truth. Grouped by theme, two impact bullets per entry.
-- `Master___CV.tex` — comprehensive CV: same body of work as the Master resume, condensed to one-line topics.
-- `Research___Resume.tex` — short, selective resume. Deliberately not comprehensive; don't auto-sync new content into it, only edit when explicitly asked.
+| File | Role |
+|---|---|
+| `Master___Resume.tex` | Comprehensive resume. All content lands here **first**. |
+| `Master___CV.tex` | Comprehensive CV — same content, descriptions shortened. |
+| `Research___Resume.tex` | Short selective resume (research applications). |
+| `TA___Resume.tex` | Targeted resume for ML/AI/DS teaching-assistant applications. |
+| `Leadership___Resume.tex` | Targeted resume for non-academic part-time jobs. |
 
-Each `.tex` has a matching `.pdf` of the same base name — regenerate and commit together whenever source changes.
+Each `.tex` has a matching `.pdf` — regenerate and commit together.
+
+## Rule 1 — Derived resumes are strict subsets
+
+`Research___Resume.tex`, `TA___Resume.tex`, `Leadership___Resume.tex` may only **omit**. They must never:
+
+- add an entry, bullet, skill, or word that is not in Master;
+- reword anything — not a metric, verb, title, supervisor name/position, institution, link, or date;
+- restructure — a Master `\resumeSubSubheading` stays a sub-sub-heading, it cannot be promoted to a `\resumeSubheading` (keep the parent entry and drop the sibling sub-entries instead);
+- use a section title that isn't in Master.
+
+To add content to a derived resume, **copy the block verbatim from Master**. If the content doesn't exist in Master yet, add it to Master first.
+
+## Rule 2 — The CV is Master with shorter descriptions
+
+`Master___CV.tex` must carry the **same section titles and the same entry titles** as Master; only bullet bodies may be condensed. Specifically:
+
+- Every entry title and every section title must appear in Master (or be a documented alias, below).
+- One Master topic (a `\resumeSubheading` or a nested `\resumeSubSubheading`) → exactly **one** condensed bullet. Don't merge two Master sub-projects into one CV bullet.
+- Drop metrics and multi-sentence detail; keep the topic.
+- **Every link in Master must survive** — as the same `\faExternalLink*` icon or embedded on a keyword. Condensing must never drop a link.
+- Master entries sharing an institution/supervisor merge into one CV entry with a date range spanning them, one bullet per original topic.
+- Content in one file but not the other is a gap to fix, not a style choice.
+
+## Documented exceptions
+
+These are the *only* permitted deviations. Anything else is a bug.
+
+| File | Exception |
+|---|---|
+| `Master___CV.tex` | Renames `Teaching` → `Teaching Experience`; splits Master's `Leadership \& Volunteering` into `Leadership Experience` + `Volunteering Experience`; groups Master's three themed `Experience -- …` sections into one `Research Experience`; promotes Master's Education scholarship bullet into its own `Honours \& Scholarships` section (text verbatim). Uses `{role}{institution}` in `\resumeSubheading` where Master uses `{title $\|$ org}{}`. |
+| `TA___Resume.tex` | `Relevant Coursework` trimmed to the ML-relevant subset. |
+| `Leadership___Resume.tex` | Section named `Skills` rather than `Technical Skills \& Coursework`. |
+
+## Verifying
+
+`scripts/check_consistency.py` enforces Rules 1–2 and the exception list. Run it after **every** content edit:
+
+```bash
+python3 scripts/check_consistency.py    # exits 1 on any violation
+```
+
+Also check action verbs:
+
+```bash
+grep -o '\\resumeItem{[A-Z][a-z]*' Master___Resume.tex | sed 's/\\resumeItem{//' | sort | uniq -c | awk '$1>1'
+```
 
 ## Build
 
 ```bash
-pdflatex Master___Resume.tex
-pdflatex Master___CV.tex
-pdflatex Research___Resume.tex
-rm -f *.aux *.log *.out   # never commit these
+pdflatex <file>.tex
+rm -f *.aux *.log *.out    # never commit these
 ```
 
-## Shared macro system
+## Macros
 
-- `\resumeSubheading{title}{location/company}{role/description}{date}` — two-column entry, `title`/`location` bold on top, `role`/`date` italic below.
-- `\resumeSubSubheading{role}{date}` — nested sub-entry under a `\resumeSubheading`.
+- `\resumeSubheading{title}{location/company}{role/description}{date}` — main entry.
+- `\resumeSubSubheading{role}{date}` — nested sub-entry.
 - `\resumeProjectHeading{title}{date}` — bold subsection label (e.g. inside Publications).
-- `\resumeItemListStart` / `\resumeItem{...}` / `\resumeItemListEnd` — bullet list under an entry.
-- `\nbresumeItemListStart` / `\nbresumeItem{...}` / `\nbresumeItemListEnd` — no-bullet list (Technical Skills).
+- `\resumeItemListStart` / `\resumeItem{…}` / `\resumeItemListEnd` — bullets.
+- `\nbresumeItemListStart` / `\nbresumeItem{…}` / `\nbresumeItemListEnd` — no-bullet list (skills).
 
-**Gotcha — bold dates:** `\resumeSubheading`'s 2nd argument is wrapped in `\textbf{}`. For single-line entries (Awards, Honours, Competitive Exams) that put a date there with args 3–4 empty, prefix it with `\mdseries` (`{\mdseries\textit{Mar '25}}`) to cancel the inherited bold.
+**Gotcha — bold dates:** `\resumeSubheading`'s 2nd argument is wrapped in `\textbf{}`. For single-line entries (Awards, Honours, Competitive Exams) that put the date there with args 3–4 empty, prefix `\mdseries` (`{\mdseries\textit{Mar '25}}`) to cancel the inherited bold.
 
-**Gotcha — literal `&`:** entries render inside a `tabular*`; an unescaped `&` in any argument is read as a column separator and cascades into fatal compile errors. Always escape as `\&`.
+**Gotcha — literal `&`:** arguments render inside a `tabular*`, so an unescaped `&` is read as a column separator and causes cascading fatal errors. Always write `\&`.
 
 ## Content conventions
 
-- Dates: en dash with spaces, `Jan '24 – May '26` (not `--`).
-- Author's own name always bolded in publication lists: `\textbf{R. Chakraborty}`.
-- Link icons (`\faExternalLink*`) are bold in Publications, unbold elsewhere — intentional, not an inconsistency.
-- Publications are split by type (Journal / Conference / Poster / Peer Reviews) via `\resumeProjectHeading`.
-- Every `\resumeItem` bullet in `Master___Resume.tex` / `Research___Resume.tex` opens with a distinct action verb — no repeats in a given file. Check before adding:
-  ```bash
-  grep -o '\\resumeItem{[A-Z][a-z]*' Master___Resume.tex | sed 's/\\resumeItem{//' | sort | uniq -c | awk '$1>1'
-  ```
-  `Master___CV.tex` bullets are noun-phrase topics, not sentences — this rule doesn't apply there.
+- Dates: en dash with spaces — `Jan '24 – May '26` (never `--`).
+- Own name bolded in author lists: `\textbf{R. Chakraborty}`.
+- Link icons are bold in Publications, unbold elsewhere — intentional.
+- Publications split by type: Journal / Conference / Poster / Peer Reviews.
+- Every `\resumeItem` in a resume opens with a **distinct action verb** — no repeats within a file. (CV bullets are noun-phrase topics; rule doesn't apply there.)
+- Dr. Mani Shankar Dasgupta is **Associate Professor**, BITS Pilani.
 
-## CV-is-a-brief-of-the-Master-resume rule
+## Publishing
 
-`Master___CV.tex` is derived from `Master___Resume.tex`, not written independently:
+Remote `resume-cv` → `github.com/Ritabrata-Chakraborty/Resume-CV.git` (**public**). No `origin` remote.
 
-- One resume topic (a `\resumeSubheading` or nested `\resumeSubSubheading`) → exactly one condensed `\resumeItem` bullet in the CV. Don't merge two resume sub-projects into one CV bullet.
-- Drop full impact bullets to a single one-line topic; no quantified outcomes.
-- Every link in the resume version must survive in the CV version — as the same icon or embedded on a keyword. Never let condensing drop a link.
-- Resume headings sharing an institution/supervisor merge into one CV entry with a spanning date range and one bullet per original topic.
-- A gap between the two files (entry in one but not the other) should be flagged, not left — except `Research___Resume.tex`, which is exempt by design.
+Real contact info must never reach it. `scripts/publish.sh` handles this:
 
-## Publishing a redacted public copy
+1. Requires all `.tex` and `CLAUDE.md` committed on `main`.
+2. Redacts email/phone to `rc@gmail.com` / `+91 00000 00000`, aborting if the substitution fails.
+3. Excludes `CLAUDE.md`, `TA___Resume.*`, `Leadership___Resume.*`; verifies the tree against an allowlist and aborts before pushing if anything unexpected is staged.
+4. Force-pushes, then **always** restores real contact info, recompiles, and copies **all** PDFs to `/home/rc/Documents/Personal/Resume/` — even if the push fails.
 
-Remote `resume-cv` → `https://github.com/Ritabrata-Chakraborty/Resume-CV.git` (public). There is no `origin` remote — this repo pushes nowhere else.
-
-Real contact info must never reach that repo: email/phone are replaced with placeholders (`rc@gmail.com`, `+91 00000 00000`), and `CLAUDE.md` is excluded entirely.
-
-Run `scripts/publish.sh` to do the whole thing safely:
-1. Requires `*.tex` and `CLAUDE.md` already committed on `main` (fails otherwise).
-2. Redacts contact info in all three `.tex` files, removes `CLAUDE.md`, recompiles PDFs.
-3. Commits that redacted snapshot and force-pushes it to `resume-cv`'s `main`.
-4. Always restores real contact info afterward (`git reset --hard` the publish commit away), recompiles real PDFs, and copies them to `/home/rc/Documents/Personal/Resume/` — this restore runs even if the push fails.
+New local-only resumes must be added to `LOCAL_ONLY_TEX`/`LOCAL_ONLY_PDF` **and** `ALLOWED_PATTERN` in that script.
